@@ -16,13 +16,13 @@
                     v-for="(skill, index) in skills"
                     :key="index"
                     class="skill-card"
-                    :data-aos="show ? 'fade-up' : null"
-                    :data-aos-delay="show ? (index * 100) : null"
+                    :class="{ 'show': showSkills }"
+                    :style="{ animationDelay: show ? (index * 0.1) + 's' : '0s' }"
                 >
                     <span class="skill-title-row">
-                        <button>
+                        <a target="_blank" :href="skill.link">
                             <img class="skill-img" :src="skill.imgSrc" />
-                        </button>
+                        </a>
                         <span class="skill-title">{{ skill.title }}</span>
                     </span>
                     <span class="skill-level-row">
@@ -37,10 +37,14 @@
 </template>
 
 <script>
-import aos from '~/mixins/aos'
 export default {
     name: 'Skills',
-    mixins: [aos],
+
+    mounted () {
+        window.addEventListener('resize', () => {
+            this.windowWidth = window.innerWidth
+        })
+    },
 
     data () {
         return {
@@ -76,24 +80,6 @@ export default {
                     skillLevel: 2,
                 },
                 {
-                    imgSrc: "icons/cpp-logo.png",
-                    title: "C++",
-                    link: "https://www.cplusplus.com/",
-                    skillLevel: 2,
-                },
-                {
-                    imgSrc: "icons/postgres-logo.png",
-                    title: "PostgreSQL",
-                    link: "https://postgresql.org/",
-                    skillLevel: 3,
-                },
-                {
-                    imgSrc: "icons/sql.png",
-                    title: "SQL",
-                    link: "https://en.wikipedia.org/wiki/SQL",
-                    skillLevel: 3,
-                },
-                {
                     imgSrc: "icons/firebase-logo.png",
                     title: "Firebase",
                     link: "https://firebase.google.com/",
@@ -118,22 +104,16 @@ export default {
                     skillLevel: 3,
                 },
                 {
-                    imgSrc: "icons/expressjs.png",
-                    title: "ExpressJS",
-                    link: "https://expressjs.com/",
-                    skillLevel: 2,
+                    imgSrc: "icons/postgres-logo.png",
+                    title: "PostgreSQL",
+                    link: "https://postgresql.org/",
+                    skillLevel: 3,
                 },
                 {
-                    imgSrc: "icons/typescript-logo.png",
-                    title: "TypeScript",
-                    link: "https://typescriptlang.org/",
-                    skillLevel: 2,
-                },
-                {
-                    imgSrc: "icons/aws.png",
-                    title: "AWS",
-                    link: "https://aws.amazon.com/",
-                    skillLevel: 2,
+                    imgSrc: "icons/sql.png",
+                    title: "SQL",
+                    link: "https://en.wikipedia.org/wiki/SQL",
+                    skillLevel: 3,
                 },
                 {
                     imgSrc: "icons/netlify.png",
@@ -145,15 +125,40 @@ export default {
                     imgSrc: "icons/npm.png",
                     title: "NPM",
                     link: "https://npmjs.com/",
-                    skillLevel: 4,
+                    skillLevel: 3,
                 },
                 {
                     imgSrc: "icons/github.png",
                     title: "Github",
                     link: "https://github.com/",
-                    skillLevel: 4,
+                    skillLevel: 3,
                 },
-            ]
+                {
+                    imgSrc: "icons/aws.png",
+                    title: "AWS",
+                    link: "https://aws.amazon.com/",
+                    skillLevel: 2,
+                },
+                {
+                    imgSrc: "icons/cpp-logo.png",
+                    title: "C++",
+                    link: "https://www.cplusplus.com/",
+                    skillLevel: 2,
+                },
+                {
+                    imgSrc: "icons/expressjs.png",
+                    title: "ExpressJS",
+                    link: "https://expressjs.com/",
+                    skillLevel: 2,
+                },
+                {
+                    imgSrc: "icons/typescript-logo.png",
+                    title: "TypeScript",
+                    link: "https://typescriptlang.org/",
+                    skillLevel: 2,
+                },
+            ],
+            windowWidth: window.innerWidth
         }
     },
 
@@ -178,7 +183,6 @@ export default {
     watch: {
         show(newValue) {
             if (newValue) {
-                // this.fadeInSkills()
             }
         },
     },
@@ -196,6 +200,7 @@ export default {
 .dialog-card {
     height: 100%;
     overflow-y: scroll;
+    background-color: rgba(61, 61, 61, 0.9);
 }
 
 /* CSS for the skill cards grid */
@@ -217,7 +222,25 @@ export default {
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  opacity: 0; /* Start with the cards hidden */
+  animation: fade-up 0.5s forwards;
 }
+
+.skill-card.show {
+  animation: fade-up 0.5s forwards;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 
 .skill-img {
     height: 30px;

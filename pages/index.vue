@@ -105,7 +105,8 @@ export default {
         'Click a topic below to learn more!'
       ],
       isOpen: false,
-      windowWidth: window.innerWidth
+      windowWidth: window.innerWidth,
+      windowHeight: window.innerHeight
     }
   },
 
@@ -147,6 +148,7 @@ export default {
 
     resizeHandler() {
       this.windowWidth = window.innerWidth
+      this.windowHeight = window.innerHeight
     },
   },
 
@@ -159,15 +161,15 @@ export default {
 </script>
 
 <style scoped>
+
 .column {
   height: 100vh;
-  display: flex;
   margin: auto;
-  flex-direction: column;
+  padding-top: 30px;
 }
 
 .typer-row {
-  margin-top: 30px;
+  /* margin-top: 30px; */
 }
 
 .typer {
@@ -181,7 +183,7 @@ export default {
 .menu-container {
   position: relative;
   width: 100%;
-  height: 90vh;
+  height: 80vh;
   display: flex;
   justify-content: center;
   align-items: center;
