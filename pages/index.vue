@@ -17,35 +17,49 @@
     </v-row>
     <v-row>
       <div class="menu-container">
-        <button @click="isOpen = !isOpen">
-          <img 
-            class="profile"
-            src="~/assets/images/profile-blue.png"
-            :style="windowWidth < 800 ? {'height': '150px'} : null"
-          />
-        </button>
-          <div
-            v-for="(item, index) in menuItems"
-            :key="index"
-            class="menu-item"
-            :class="{ 'open': isOpen }"
-            :style="getItemStyle(index)"
-          >
-            <transition name="menu-item-transition">
-              <v-btn class="item-btn" text v-if="isOpen" @click="item.click()">
-                <span class="item-btn-content">
-                  <v-icon class="item-icon" :size="windowWidth < 800 ? 35 : 45">{{item.icon}}</v-icon>
-                  <span class="item-name" v-if="windowWidth > 650">&ensp;{{ item.label }}</span>
-                </span>
-              </v-btn>
-            </transition>
-          </div>
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <button @click="isOpen = !isOpen" v-on="on" v-bind="attrs" >
+              <img
+                class="profile"
+                src="~/assets/images/profile-blue.png"
+                :style="windowWidth < 800 ? {'height': '150px'} : null"
+              />
+            </button>
+          </template>
+          <span>{{isOpen ? 'Hide Menu' : 'Show Menu'}}</span>
+        </v-tooltip>
+        <div
+          v-for="(item, index) in menuItems"
+          :key="index"
+          class="menu-item"
+          :class="{ 'open': isOpen }"
+          :style="getItemStyle(index)"
+        >
+          <transition name="menu-item-transition">
+            <v-btn
+              v-if="isOpen"
+              class="item-btn"
+              @click="item.click()"
+              text
+            >
+              <span class="item-btn-content" v-if="windowWidth <= 650">
+                <v-icon class="item-icon" name="icon" size="35">{{item.icon}}</v-icon>
+                <br><label class="item-name" style="font-size: 12px" for="icon">{{item.label}}</label>
+              </span>
+              <span class="item-btn-content" v-else>
+                <v-icon class="item-icon" :size="windowWidth < 800 ? 35 : 45">{{item.icon}}</v-icon>
+                <span class="item-name">&ensp;{{ item.label }}</span>
+              </span>
+            </v-btn>
+          </transition>
+        </div>
       </div>
     </v-row>
-    <Skills :open="showSkills" @close="showSkills = false" />
-    <Education :open="showEducation" @close="showEducation = false" />
-    <Experience :open="showExperience" @close="showExperience = false" />
-    <Contact :open="showContact" @close="showContact = false" />
+    <Skills v-if="showSkills" />
+    <Education />
+    <Experience />
+    <Contact />
   </v-col>
 </template>
 
@@ -62,6 +76,10 @@ export default {
     window.addEventListener('resize', this.resizeHandler)
   },
 
+  mounted () {
+    this.isOpen = true
+  },
+
   components: {
     VueTyper,
     Skills,
@@ -73,10 +91,10 @@ export default {
   data () {
     return {
       menuItems: [
-        { icon: 'mdi-code-tags', label: 'Skills', click: () => this.showSkills = true },
-        { icon: 'mdi-school', label: 'Education', click: () => this.showEducation = true },
-        { icon: 'mdi-briefcase', label: 'Experience', click: () => this.showExperience = true },
-        { icon: 'mdi-email', label: 'Contact', click: () => this.showContact = true },
+        { icon: 'mdi-code-tags', label: 'Skills', click: () => this.openMenuItem('skills') },
+        { icon: 'mdi-school', label: 'Education', click: () => this.openMenuItem('education') },
+        { icon: 'mdi-briefcase', label: 'Experience', click: () => this.openMenuItem('experience') },
+        { icon: 'mdi-email', label: 'Contact', click: () => this.openMenuItem('contact') },
         { icon: 'mdi-github', label: 'Github', click: () => this.openLink('https://github.com/athibau2') },
         { icon: 'mdi-linkedin', label: 'LinkedIn', click: () => this.openLink('https://linkedin.com/in/andrew-thibaudeau/') },
       ],
@@ -84,12 +102,8 @@ export default {
         'Hello, my name is Andrew Thibaudeau',
         'I\'m a software developer',
         'I\'m a BYU student',
-        'Click my picture to learn more!'
+        'Click a topic below to learn more!'
       ],
-      showSkills: false,
-      showEducation: false,
-      showExperience: false,
-      showContact: false,
       isOpen: false,
       windowWidth: window.innerWidth
     }
@@ -99,6 +113,23 @@ export default {
     openLink(link) {
       console.log(link)
       window.open(link)
+    },
+
+    async openMenuItem(source) {
+      switch(source) {
+        case 'skills':
+          await this.$store.commit('components/setShowSkills', true)
+          break;
+        case 'education':
+          await this.$store.commit('components/setShowEducation', true)
+          break;
+        case 'experience':
+          await this.$store.commit('components/setShowExperience', true)
+          break;
+        case 'contact':
+          await this.$store.commit('components/setShowContact', true)
+          break;
+      }
     },
 
     getItemStyle(index) {
@@ -117,6 +148,12 @@ export default {
     resizeHandler() {
       this.windowWidth = window.innerWidth
     },
+  },
+
+  computed: {
+    showSkills () {
+      return this.$store.state.components.showSkills
+    }
   }
 }
 </script>
@@ -179,6 +216,7 @@ export default {
 
 .item-name {
   font-size: 18px;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .menu-item {
@@ -188,7 +226,7 @@ export default {
 
 .menu-item-transition-enter-active,
 .menu-item-transition-leave-active {
-  transition: all 0.5s;
+  transition: all 1.5s;
 }
 
 .menu-item-transition-enter,

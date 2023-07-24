@@ -1,5 +1,5 @@
 <template>
-    <v-dialog class="dialog" v-model="open"
+    <v-dialog class="dialog" v-model="show"
         fullscreen
     >
         <v-card>
@@ -20,18 +20,23 @@
 export default {
     name: 'Experience',
 
-    props: {
-        open: {
-            type: Boolean,
-            required: true
-        }
-    },
-
     methods: {
         close() {
             this.$emit('close')
         }
-    }
+    },
+
+    computed: {
+        show: {
+            get () {
+                return this.$store.state.components.showExperience
+            },
+
+            async set () {
+                await this.$store.commit('components/setShowExperience', false)
+            }
+        }
+    },
 }
 </script>
 
