@@ -1,8 +1,8 @@
 export const state = () => ({
     showSkills: false,
-    showEducation: false,
-    showExperience: false,
+    showPortfolioList: false,
     showContact: false,
+    showAbout: false,
 })
 
 export const mutations = {
@@ -10,15 +10,15 @@ export const mutations = {
         state.showSkills = data
     },
 
-    setShowEducation(state, data) {
-        state.showEducation = data
-    },
-
-    setShowExperience(state, data) {
-        state.showExperience = data
+    setShowPortfolioList(state, data) {
+        state.showPortfolioList = data
     },
 
     setShowContact(state, data) {
         state.showContact = data
+    },
+
+    setShowAbout(state, data) {
+        state.showAbout = data
     }
 }

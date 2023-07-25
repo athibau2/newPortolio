@@ -7,7 +7,7 @@
                 <v-btn icon @click="close()">
                     <v-icon>mdi-close</v-icon>
                 </v-btn>
-                <v-toolbar-title>
+                <v-toolbar-title class="code-font">
                     Contact Me
                 </v-toolbar-title>
             </v-toolbar>
@@ -21,8 +21,8 @@ export default {
     name: 'Contact',
 
     methods: {
-        close() {
-            this.$emit('close')
+        async close() {
+            await this.$store.commit('components/setShowContact', false)
         }
     },
 
@@ -41,5 +41,6 @@ export default {
 </script>
 
 <style scoped>
+@import '~/assets/styles.css';
 
 </style>

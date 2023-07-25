@@ -7,7 +7,7 @@
                 <v-btn icon @click="close()">
                     <v-icon>mdi-close</v-icon>
                 </v-btn>
-                <v-toolbar-title>
+                <v-toolbar-title class="code-font">
                     My Skills
                 </v-toolbar-title>
             </v-toolbar>
@@ -16,7 +16,7 @@
                     v-for="(skill, index) in skills"
                     :key="index"
                     class="skill-card"
-                    :class="{ 'show': showSkills }"
+                    :class="{ 'show': show }"
                     :style="{ animationDelay: show ? (index * 0.1) + 's' : '0s' }"
                 >
                     <span class="skill-title-row">
@@ -116,6 +116,12 @@ export default {
                     skillLevel: 3,
                 },
                 {
+                    imgSrc: "icons/strapi.png",
+                    title: "Strapi",
+                    link: "https://strapi.io",
+                    skillLevel: 3,
+                },
+                {
                     imgSrc: "icons/netlify.png",
                     title: "Netlify",
                     link: "https://netlify.com/",
@@ -190,6 +196,7 @@ export default {
 </script>
 
 <style scoped>
+@import '~/assets/styles.css';
 
 .dialog {
     display: flex;
@@ -267,7 +274,7 @@ export default {
 }
 
 .skill-level-icon {
-    color: #3d3d3d;
+    color: rgb(74, 74, 191);
     margin-top: 15px;
 }
 

@@ -1,7 +1,7 @@
 <template>
   <v-col class="column justify-center">
     <v-row class="typer-row" justify="center" align="center">
-      <VueTyper class="typer"
+      <VueTyper class="typer code-font gradient"
         :text="typerText"
         :repeat='Infinity'
         :shuffle='false'
@@ -19,7 +19,7 @@
       <div class="menu-container">
         <v-tooltip bottom>
           <template v-slot:activator="{ on, attrs }">
-            <button @click="isOpen = !isOpen" v-on="on" v-bind="attrs" >
+            <button @click="openMenuItem('about')" v-on="on" v-bind="attrs" >
               <img
                 class="profile"
                 src="~/assets/images/profile-blue.png"
@@ -27,7 +27,7 @@
               />
             </button>
           </template>
-          <span>{{isOpen ? 'Hide Menu' : 'Show Menu'}}</span>
+          <span>About Me</span>
         </v-tooltip>
         <div
           v-for="(item, index) in menuItems"
@@ -48,7 +48,7 @@
                 <br><label class="item-name" style="font-size: 12px" for="icon">{{item.label}}</label>
               </span>
               <span class="item-btn-content" v-else>
-                <v-icon class="item-icon" :size="windowWidth < 800 ? 35 : 45">{{item.icon}}</v-icon>
+                <v-icon class="item-icon" :size="windowWidth < 800 ? 35 : 40">{{item.icon}}</v-icon>
                 <span class="item-name">&ensp;{{ item.label }}</span>
               </span>
             </v-btn>
@@ -56,19 +56,20 @@
         </div>
       </div>
     </v-row>
-    <Skills v-if="showSkills" />
-    <Education />
-    <Experience />
+    <Skills />
+    <PortfolioList :list="openedList" :listType="listType" />
     <Contact />
+    <About />
   </v-col>
 </template>
 
 <script>
 import { VueTyper } from 'vue-typer'
 import Skills from '~/components/Skills.vue'
-import Education from '~/components/Education.vue'
-import Experience from '~/components/Experience.vue'
+import PortfolioList from '~/components/PortfolioList.vue'
 import Contact from '~/components/Contact.vue'
+import About from '~/components/About.vue'
+import { educationList, experienceList } from '~/models/portfolio-list'
 export default {
   name: 'IndexPage',
 
@@ -83,9 +84,9 @@ export default {
   components: {
     VueTyper,
     Skills,
-    Education,
-    Experience,
-    Contact
+    PortfolioList,
+    Contact,
+    About
   },
 
   data () {
@@ -105,6 +106,8 @@ export default {
         'Click a topic below to learn more!'
       ],
       isOpen: false,
+      openedList: [],
+      listType: '',
       windowWidth: window.innerWidth,
       windowHeight: window.innerHeight
     }
@@ -122,21 +125,27 @@ export default {
           await this.$store.commit('components/setShowSkills', true)
           break;
         case 'education':
-          await this.$store.commit('components/setShowEducation', true)
+          this.openedList = educationList
+          this.listType = 'My Education'
+          await this.$store.commit('components/setShowPortfolioList', true)
           break;
         case 'experience':
-          await this.$store.commit('components/setShowExperience', true)
+          this.openedList = experienceList
+          this.listType = 'My Experience'
+          await this.$store.commit('components/setShowPortfolioList', true)
           break;
         case 'contact':
           await this.$store.commit('components/setShowContact', true)
           break;
+        case 'about':
+          await this.$store.commit('components/setShowAbout', true)
       }
     },
 
     getItemStyle(index) {
       const total = this.menuItems.length;
       const angle = (360 / total) * index;
-      const position = 30; // Adjust this value to change the radius of the circle
+      const position = 35; // Adjust this value to change the radius of the circle
       const radians = (angle * Math.PI) / 180;
       const x = 50 + position * Math.cos(radians);
       const y = 50 + position * Math.sin(radians);
@@ -151,16 +160,11 @@ export default {
       this.windowHeight = window.innerHeight
     },
   },
-
-  computed: {
-    showSkills () {
-      return this.$store.state.components.showSkills
-    }
-  }
 }
 </script>
 
 <style scoped>
+@import '~/assets/styles.css';
 
 .column {
   height: 100vh;
@@ -168,15 +172,10 @@ export default {
   padding-top: 30px;
 }
 
-.typer-row {
-  /* margin-top: 30px; */
-}
-
 .typer {
   padding: 6px 20px;
-  background-image: linear-gradient(to right, rgb(74, 74, 191), grey, rgb(74, 74, 191)); /**#B39DDB, #E57373, #B39DDB */
   font-size: 20px;
-  font-family: 'Courier New', Courier, monospace;
+  /* font-family: 'Courier New', Courier, monospace; */
   border-radius: 4px;
 }
 
@@ -217,7 +216,7 @@ export default {
 }
 
 .item-name {
-  font-size: 18px;
+  font-size: 16px;
   font-family: Arial, Helvetica, sans-serif;
 }
 

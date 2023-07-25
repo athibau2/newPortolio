@@ -1,0 +1,7 @@
+.code-font {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.gradient {
+    background-image: linear-gradient(to right, rgba(74, 74, 191, 0.7), rgb(128, 128, 128, 0.7), rgba(74, 74, 191, 0.7));
+}
