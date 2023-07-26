@@ -18,6 +18,8 @@
                     action="/thank-you"
                     netlify
                     :style="windowWidth < 700 ? {'width': '95%'} : null"
+                    data-aos="zoom-in"
+                    data-aos-duration="1500"
                 >
                     <input type="hidden" name="form-name" value="contact-form">
                     <span class="header">Send Me a Message!</span>
@@ -63,8 +65,10 @@
 </template>
 
 <script>
+import aos from '~/mixins/aos'
 export default {
     name: 'Contact',
+    mixins: [aos],
 
     mounted () {
         window.addEventListener('resize', () => {
