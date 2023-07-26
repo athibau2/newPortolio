@@ -12,7 +12,11 @@
                 </v-toolbar-title>
             </v-toolbar>
             <v-card-text class="card-text">
-                <form class="form" :style="windowWidth < 700 ? {'width': '95%'} : null" netlify>
+                <form class="form"
+                    method="POST"
+                    data-netlify="true"
+                    :style="windowWidth < 700 ? {'width': '95%'} : null"
+                >
                     <span class="header">Send Me a Message!</span>
                     <v-row class="form-row" align="center" justify="center">
                         <input class="form-row-field"
