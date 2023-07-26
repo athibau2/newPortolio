@@ -136,7 +136,7 @@ export default {
     font-family: Arial, Helvetica, sans-serif !important;
     font-size: 14px;
     color: #f0f0f0 !important;
-    background-color: rgba(61, 61, 61, 0.8);
+    background-color: rgba(61, 61, 61, 0.9);
 }
 
 .form-row-field {
