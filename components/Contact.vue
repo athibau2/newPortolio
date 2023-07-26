@@ -15,10 +15,11 @@
                 <form class="form"
                     name="contact-form"
                     method="POST"
+                    action="/thank-you"
                     netlify
                     :style="windowWidth < 700 ? {'width': '95%'} : null"
                 >
-                    <input type="hidden" name="form-name" value="contact-form">
+                    <input type="hidden" name="contact-form" value="contact-form">
                     <span class="header">Send Me a Message!</span>
                     <v-row class="form-row" align="center" justify="center">
                         <input class="form-row-field"
