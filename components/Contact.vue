@@ -15,7 +15,7 @@
                 <form class="form"
                     name="contact-form"
                     method="POST"
-                    data-netlify="true"
+                    netlify
                     :style="windowWidth < 700 ? {'width': '95%'} : null"
                 >
                     <span class="header">Send Me a Message!</span>
