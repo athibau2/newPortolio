@@ -13,6 +13,7 @@
             </v-toolbar>
             <v-card-text class="card-text">
                 <form class="form"
+                    name="contact-form"
                     method="POST"
                     data-netlify="true"
                     :style="windowWidth < 700 ? {'width': '95%'} : null"
