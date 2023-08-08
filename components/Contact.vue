@@ -25,14 +25,14 @@
                     <span class="header">Send Me a Message!</span>
                     <v-row class="form-row" align="center" justify="center">
                         <input class="form-row-field"
-                            style="margin-right: 3px"
+                            style="margin-right: 0.5%"
                             type="name"
                             name="name"
                             placeholder="Your name"
                             required
                         />
                         <input class="form-row-field"
-                            style="margin-left: 3px"
+                            style="margin-left: 0.5%"
                             type="email"
                             name="email"
                             placeholder="Your email"
@@ -117,14 +117,6 @@ export default {
     align-items: center;
 }
 
-.header {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 24px;
-    display: flex;
-    justify-content: center;
-    margin: 20px auto;
-}
-
 .form {
     width: 50%;
 }
@@ -144,7 +136,7 @@ export default {
 }
 
 .form-row-field {
-    width: 49%;
+    width: 49.5%;
 }
 
 .form-field {

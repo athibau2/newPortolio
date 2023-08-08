@@ -5,3 +5,12 @@
 .gradient {
     background-image: linear-gradient(to right, rgba(74, 74, 191, 0.7), rgb(128, 128, 128, 0.7), rgba(74, 74, 191, 0.7));
 }
+
+.header {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 24px;
+    display: flex;
+    justify-content: center;
+    margin: 40px auto;
+    color: #f0f0f0;
+}
