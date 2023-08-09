@@ -19,7 +19,7 @@
                 >
                     <span class="header" style="margin-bottom: 0px">{{item.name}}</span>
                     <v-divider class="divider" />
-                    <p class="about-me-text" v-html="item.text"></p>
+                    <p class="about-me-text" :style="windowWidth < 800 ? {'width': '80%'} : null" v-html="item.text"></p>
                 </div>
             </v-card-text>
         </v-card>
