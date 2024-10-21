@@ -25,11 +25,6 @@
                         </a>
                         <span class="skill-title">{{ skill.title }}</span>
                     </span>
-                    <span class="skill-level-row">
-                        <v-icon class="skill-level-icon" v-for="i in 5" :key="i">
-                            {{skill.skillLevel <= i - 1 ? 'mdi-circle-outline' : 'mdi-circle'}}
-                        </v-icon>
-                    </span>
                 </v-card>
             </v-row>
         </div>
@@ -39,129 +34,115 @@
 <script>
 export default {
     name: 'Skills',
-
+    
     mounted () {
         window.addEventListener('resize', () => {
             this.windowWidth = window.innerWidth
         })
     },
-
+    
     data () {
         return {
             skills: [
                 {
-                    imgSrc: "icons/vue-logo.png",
-                    title: "VueJS",
-                    link: "https://vuejs.org/",
-                    skillLevel: 4,
-                },
-                {
-                    imgSrc: "icons/nuxt.png",
-                    title: "NuxtJS",
-                    link: "https://nuxtjs.org/",
-                    skillLevel: 4,
-                },
-                {
-                    imgSrc: "icons/html-css.png",
-                    title: "HTML/CSS",
-                    link: "https://html.com/",
-                    skillLevel: 4,
-                },
-                {
-                    imgSrc: "icons/flutter-logo.png",
-                    title: "Flutter",
-                    link: "https://flutter.dev/",
-                    skillLevel: 3,
-                },
-                {
-                    imgSrc: "icons/dart.png",
-                    title: "Dart",
-                    link: "https://dart.dev/",
-                    skillLevel: 2,
-                },
-                {
-                    imgSrc: "icons/firebase-logo.png",
-                    title: "Firebase",
-                    link: "https://firebase.google.com/",
-                    skillLevel: 3,
-                },
-                {
-                    imgSrc: "icons/supabase.png",
-                    title: "Supabase",
-                    link: "https://supabase.com/",
-                    skillLevel: 4,
-                },
-                {
-                    imgSrc: "icons/javascript-logo.png",
-                    title: "JavaScript",
-                    link: "https://javascript.com/",
-                    skillLevel: 4,
-                },
-                {
-                    imgSrc: "icons/node-logo.png",
-                    title: "NodeJS",
-                    link: "https://nodejs.org/",
-                    skillLevel: 3,
-                },
-                {
-                    imgSrc: "icons/postgres-logo.png",
-                    title: "PostgreSQL",
-                    link: "https://postgresql.org/",
-                    skillLevel: 3,
-                },
-                {
-                    imgSrc: "icons/sql.png",
-                    title: "SQL",
-                    link: "https://en.wikipedia.org/wiki/SQL",
-                    skillLevel: 3,
-                },
-                {
-                    imgSrc: "icons/strapi.png",
-                    title: "Strapi",
-                    link: "https://strapi.io",
-                    skillLevel: 3,
-                },
-                {
-                    imgSrc: "icons/netlify.png",
-                    title: "Netlify",
-                    link: "https://netlify.com/",
-                    skillLevel: 3,
-                },
-                {
-                    imgSrc: "icons/npm.png",
-                    title: "NPM",
-                    link: "https://npmjs.com/",
-                    skillLevel: 3,
-                },
-                {
-                    imgSrc: "icons/github.png",
-                    title: "Github",
-                    link: "https://github.com/",
-                    skillLevel: 3,
-                },
-                {
-                    imgSrc: "icons/aws.png",
-                    title: "AWS",
-                    link: "https://aws.amazon.com/",
-                    skillLevel: 2,
-                },
-                {
-                    imgSrc: "icons/cpp-logo.png",
-                    title: "C++",
-                    link: "https://www.cplusplus.com/",
-                    skillLevel: 2,
-                },
-                {
-                    imgSrc: "icons/expressjs.png",
-                    title: "ExpressJS",
-                    link: "https://expressjs.com/",
-                    skillLevel: 2,
+                    imgSrc: "icons/angular.png",
+                    title: "Angular",
+                    link: "https://angular.dev/",
                 },
                 {
                     imgSrc: "icons/typescript-logo.png",
                     title: "TypeScript",
                     link: "https://typescriptlang.org/",
-                    skillLevel: 2,
+                },
+                {
+                    imgSrc: "icons/vue-logo.png",
+                    title: "VueJS",
+                    link: "https://vuejs.org/",
+                },
+                {
+                    imgSrc: "icons/nuxt.png",
+                    title: "NuxtJS",
+                    link: "https://nuxtjs.org/",
+                },
+                {
+                    imgSrc: "icons/html-css.png",
+                    title: "HTML/CSS",
+                    link: "https://html.com/",
+                },
+                {
+                    imgSrc: "icons/flutter-logo.png",
+                    title: "Flutter",
+                    link: "https://flutter.dev/",
+                },
+                {
+                    imgSrc: "icons/dart.png",
+                    title: "Dart",
+                    link: "https://dart.dev/",
+                },
+                {
+                    imgSrc: "icons/firebase-logo.png",
+                    title: "Firebase",
+                    link: "https://firebase.google.com/",
+                },
+                {
+                    imgSrc: "icons/supabase.png",
+                    title: "Supabase",
+                    link: "https://supabase.com/",
+                },
+                {
+                    imgSrc: "icons/javascript-logo.png",
+                    title: "JavaScript",
+                    link: "https://javascript.com/",
+                },
+                {
+                    imgSrc: "icons/node-logo.png",
+                    title: "NodeJS",
+                    link: "https://nodejs.org/",
+                },
+                {
+                    imgSrc: "icons/postgres-logo.png",
+                    title: "PostgreSQL",
+                    link: "https://postgresql.org/",
+                },
+                {
+                    imgSrc: "icons/sql.png",
+                    title: "SQL",
+                    link: "https://en.wikipedia.org/wiki/SQL",
+                },
+                {
+                    imgSrc: "icons/strapi.png",
+                    title: "Strapi",
+                    link: "https://strapi.io",
+                },
+                {
+                    imgSrc: "icons/netlify.png",
+                    title: "Netlify",
+                    link: "https://netlify.com/",
+                },
+                {
+                    imgSrc: "icons/npm.png",
+                    title: "NPM",
+                    link: "https://npmjs.com/",
+                },
+                {
+                    imgSrc: "icons/github.png",
+                    title: "Github",
+                    link: "https://github.com/",
+                },
+                {
+                    imgSrc: "icons/aws.png",
+                    title: "AWS",
+                    link: "https://aws.amazon.com/",
+                },
+                {
+                    imgSrc: "icons/cpp-logo.png",
+                    title: "C++",
+                    link: "https://www.cplusplus.com/",
+                },
+                {
+                    imgSrc: "icons/expressjs.png",
+                    title: "ExpressJS",
+                    link: "https://expressjs.com/",
                 },
             ],
             windowWidth: window.innerWidth

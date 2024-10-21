@@ -51,8 +51,16 @@ export const educationList = [
 
 export const experienceList = [
   {
+    title: 'Fidelity Investments',
+    subtitle: 'Mobile Software Engineer: June 2024 - Present',
+    image: '/logos/fidelity.png',
+    description: 'Hired out of college into the Fidelity LEAP technology immersion program, I spent the first 18 weeks of my employment in technical training where I learned about the technologies and processes used in Fidelity.\n\nI now work on a team dealing with web and mobile applications for account management. Our projects range from Angular web apps to native mobile apps.',
+    media: ['/icons/angular.png', '/icons/typescript-logo.png', '/icons/graphql.png'],
+    url: null
+  },
+  {
     title: 'BYU Law School',
-    subtitle: 'Backend Web Developer: April 2023 - Present',
+    subtitle: 'Backend Web Developer: April 2023 - January 2024',
     image: '/logos/byu-law.png',
     description: 'Since April 2023, I have worked as a backend web developer for the BYU Law School. I work with a team of frontend and backend developers, providing maintainance to the internal faculty system and managing public websites.\n\nI have made a big impact during our project to rebuild the entire informational website from scratch. The backend team has utilized Strapi to model all the data that would be stored. I provided several useful algorithms, from removing data bloat in API responses to exporting and backing up the entire database to AWS.',
     media: ['/icons/strapi.png', '/icons/node-logo.png', '/icons/mysql.png', '/icons/aws.png'],
